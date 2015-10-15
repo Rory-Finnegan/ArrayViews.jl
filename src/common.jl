@@ -46,6 +46,7 @@ contrank{T,N,M}(a::StridedArrayView{T,N,M}) = ContRank{M}
 
 length(a::StridedArrayView) = a.len
 size(a::StridedArrayView) = a.shp
+mutable(a::StridedArrayView) = a.mutable
 
 getdim{N}(s::NTuple{N,Int}, d::Integer) = (1 <= d <= N ? s[d] : 1)
 size{T,N}(a::StridedArrayView{T,N}, d::Integer) = getdim(size(a), d)

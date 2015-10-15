@@ -252,105 +252,105 @@ _vstrides{N}(ss::NTuple{N,Int}, k::Int, i1::Subs, i2::Subs, i3::Subs, I::Subs...
 
 ##### View construction ######
 
-make_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i::Subs) =
-    ContiguousView(parent(a), aoffset(a, i), shp)
+make_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i::Subs; mutable=true) =
+    ContiguousView(parent(a), aoffset(a, i), shp; mutable=mutable)
 
-make_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs) =
-    ContiguousView(parent(a), aoffset(a, i1, i2), shp)
+make_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs; mutable=true) =
+    ContiguousView(parent(a), aoffset(a, i1, i2), shp; mutable=mutable)
 
-make_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs) =
-    ContiguousView(parent(a), aoffset(a, i1, i2, i3), shp)
+make_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs; mutable=true) =
+    ContiguousView(parent(a), aoffset(a, i1, i2, i3), shp; mutable=mutable)
 
-make_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs, i4::Subs) =
-    ContiguousView(parent(a), aoffset(a, i1, i2, i3, i4), shp)
+make_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs, i4::Subs; mutable=true) =
+    ContiguousView(parent(a), aoffset(a, i1, i2, i3, i4), shp; mutable=mutable)
 
-make_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs, i4::Subs, i5::Subs, I::Subs...) =
-    ContiguousView(parent(a), aoffset(a, i1, i2, i3, i4, i5, I...), shp)
+make_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs, i4::Subs, i5::Subs, I::Subs...; mutable=true) =
+    ContiguousView(parent(a), aoffset(a, i1, i2, i3, i4, i5, I...), shp; mutable=mutable)
 
-make_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i::Subs) =
-    StridedView(parent(a), aoffset(a, i), shp, cr, vstrides(a, i))
+make_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i::Subs; mutable=true) =
+    StridedView(parent(a), aoffset(a, i), shp, cr, vstrides(a, i); mutable=mutable)
 
-make_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs) =
-    StridedView(parent(a), aoffset(a, i1, i2), shp, cr, vstrides(a, i1, i2))
+make_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs; mutable=true) =
+    StridedView(parent(a), aoffset(a, i1, i2), shp, cr, vstrides(a, i1, i2); mutable=mutable)
 
-make_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs) =
-    StridedView(parent(a), aoffset(a, i1, i2, i3), shp, cr, vstrides(a, i1, i2, i3))
+make_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs; mutable=true) =
+    StridedView(parent(a), aoffset(a, i1, i2, i3), shp, cr, vstrides(a, i1, i2, i3); mutable=mutable)
 
-make_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs, i4::Subs) =
-    StridedView(parent(a), aoffset(a, i1, i2, i3, i4), shp, cr, vstrides(a, i1, i2, i3, i4))
+make_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs, i4::Subs; mutable=true) =
+    StridedView(parent(a), aoffset(a, i1, i2, i3, i4), shp, cr, vstrides(a, i1, i2, i3, i4); mutable=mutable)
 
-make_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs, i4::Subs, i5::Subs, I::Subs...) =
-    StridedView(parent(a), aoffset(a, i1, i2, i3, i4, i5, I...), shp, cr, vstrides(a, i1, i2, i3, i4, i5, I...))
+make_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs, i4::Subs, i5::Subs, I::Subs...; mutable=true) =
+    StridedView(parent(a), aoffset(a, i1, i2, i3, i4, i5, I...), shp, cr, vstrides(a, i1, i2, i3, i4, i5, I...); mutable=mutable)
 
 
-make_unsafe_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i::Subs) =
-    UnsafeContiguousView(parent_or_ptr(a), aoffset(a, i), shp)
+make_unsafe_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i::Subs; mutable=true) =
+    UnsafeContiguousView(parent_or_ptr(a), aoffset(a, i), shp; mutable=mutable)
 
-make_unsafe_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs) =
-    UnsafeContiguousView(parent_or_ptr(a), aoffset(a, i1, i2), shp)
+make_unsafe_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs; mutable=true) =
+    UnsafeContiguousView(parent_or_ptr(a), aoffset(a, i1, i2), shp; mutable=mutable)
 
-make_unsafe_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs) =
-    UnsafeContiguousView(parent_or_ptr(a), aoffset(a, i1, i2, i3), shp)
+make_unsafe_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs; mutable=true) =
+    UnsafeContiguousView(parent_or_ptr(a), aoffset(a, i1, i2, i3), shp; mutable=mutable)
 
-make_unsafe_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs, i4::Subs) =
-    UnsafeContiguousView(parent_or_ptr(a), aoffset(a, i1, i2, i3, i4), shp)
+make_unsafe_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs, i4::Subs; mutable=true) =
+    UnsafeContiguousView(parent_or_ptr(a), aoffset(a, i1, i2, i3, i4), shp; mutable=mutable)
 
-make_unsafe_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs, i4::Subs, i5::Subs, I::Subs...) =
-    UnsafeContiguousView(parent_or_ptr(a), aoffset(a, i1, i2, i3, i4, i5, I...), shp)
+make_unsafe_view{N}(a::DenseArray, cr::Type{ContRank{N}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs, i4::Subs, i5::Subs, I::Subs...; mutable=true) =
+    UnsafeContiguousView(parent_or_ptr(a), aoffset(a, i1, i2, i3, i4, i5, I...), shp; mutable=mutable)
 
-make_unsafe_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i::Subs) =
-    UnsafeStridedView(parent_or_ptr(a), aoffset(a, i), shp, cr, vstrides(a, i))
+make_unsafe_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i::Subs; mutable=true) =
+    UnsafeStridedView(parent_or_ptr(a), aoffset(a, i), shp, cr, vstrides(a, i); mutable=mutable)
 
-make_unsafe_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs) =
-    UnsafeStridedView(parent_or_ptr(a), aoffset(a, i1, i2), shp, cr, vstrides(a, i1, i2))
+make_unsafe_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs; mutable=true) =
+    UnsafeStridedView(parent_or_ptr(a), aoffset(a, i1, i2), shp, cr, vstrides(a, i1, i2); mutable=mutable)
 
-make_unsafe_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs) =
-    UnsafeStridedView(parent_or_ptr(a), aoffset(a, i1, i2, i3), shp, cr, vstrides(a, i1, i2, i3))
+make_unsafe_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs; mutable=true) =
+    UnsafeStridedView(parent_or_ptr(a), aoffset(a, i1, i2, i3), shp, cr, vstrides(a, i1, i2, i3); mutable=mutable)
 
-make_unsafe_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs, i4::Subs) =
-    UnsafeStridedView(parent_or_ptr(a), aoffset(a, i1, i2, i3, i4), shp, cr, vstrides(a, i1, i2, i3, i4))
+make_unsafe_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs, i4::Subs; mutable=true) =
+    UnsafeStridedView(parent_or_ptr(a), aoffset(a, i1, i2, i3, i4), shp, cr, vstrides(a, i1, i2, i3, i4); mutable=mutable)
 
-make_unsafe_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs, i4::Subs, i5::Subs, I::Subs...) =
-    UnsafeStridedView(parent_or_ptr(a), aoffset(a, i1, i2, i3, i4, i5, I...), shp, cr, vstrides(a, i1, i2, i3, i4, i5, I...))
+make_unsafe_view{M,N}(a::DenseArray, cr::Type{ContRank{M}}, shp::NTuple{N,Int}, i1::Subs, i2::Subs, i3::Subs, i4::Subs, i5::Subs, I::Subs...; mutable=true) =
+    UnsafeStridedView(parent_or_ptr(a), aoffset(a, i1, i2, i3, i4, i5, I...), shp, cr, vstrides(a, i1, i2, i3, i4, i5, I...); mutable=mutable)
 
 
 ##### Interface
 
-view(a::Array) = ContiguousView(a, size(a))
-view(a::ArrayView) = a
+view(a::Array; mutable=true) = ContiguousView(a, size(a); mutable=mutable)
+view(a::ArrayView; mutable=true) = typeof(a)(map(i -> eval(parse("a.$(i)")), fieldnames(a))...; mutable=mutable)
 
-view(a::DenseArray, i::Subs) =
-    (shp = vshape(a, i); make_view(a, restrict_crank(acontrank(a, i), shp), shp, i))
+view(a::DenseArray, i::Subs; mutable=true) =
+    (shp = vshape(a, i); make_view(a, restrict_crank(acontrank(a, i), shp), shp, i; mutable=mutable))
 
-view(a::DenseArray, i1::Subs, i2::Subs) =
-    (shp = vshape(a, i1, i2); make_view(a, restrict_crank(acontrank(a, i1, i2), shp), shp, i1, i2))
+view(a::DenseArray, i1::Subs, i2::Subs; mutable=true) =
+    (shp = vshape(a, i1, i2); make_view(a, restrict_crank(acontrank(a, i1, i2), shp), shp, i1, i2; mutable=mutable))
 
-view(a::DenseArray, i1::Subs, i2::Subs, i3::Subs) =
-    (shp = vshape(a, i1, i2, i3); make_view(a, restrict_crank(acontrank(a, i1, i2, i3), shp), shp, i1, i2, i3))
+view(a::DenseArray, i1::Subs, i2::Subs, i3::Subs; mutable=true) =
+    (shp = vshape(a, i1, i2, i3); make_view(a, restrict_crank(acontrank(a, i1, i2, i3), shp), shp, i1, i2, i3; mutable=mutable))
 
-view(a::DenseArray, i1::Subs, i2::Subs, i3::Subs, i4::Subs) =
-    (shp = vshape(a, i1, i2, i3, i4); make_view(a, restrict_crank(acontrank(a, i1, i2, i3, i4), shp), shp, i1, i2, i3, i4))
+view(a::DenseArray, i1::Subs, i2::Subs, i3::Subs, i4::Subs; mutable=true) =
+    (shp = vshape(a, i1, i2, i3, i4); make_view(a, restrict_crank(acontrank(a, i1, i2, i3, i4), shp), shp, i1, i2, i3, i4; mutable=mutable))
 
-view(a::DenseArray, i1::Subs, i2::Subs, i3::Subs, i4::Subs, i5::Subs, I::Subs...) =
+view(a::DenseArray, i1::Subs, i2::Subs, i3::Subs, i4::Subs, i5::Subs, I::Subs...; mutable=true) =
     (shp = vshape(a, i1, i2, i3, i4, i5, I...);
-     make_view(a, restrict_crank(acontrank(a, i1, i2, i3, i4, i5, I...), shp), shp, i1, i2, i3, i4, i5, I...))
+     make_view(a, restrict_crank(acontrank(a, i1, i2, i3, i4, i5, I...), shp), shp, i1, i2, i3, i4, i5, I...; mutable=mutable))
 
 
 unsafe_view(a::Array) = ContiguousView(a, size(a))
-unsafe_view(a::ArrayView) = a
+unsafe_view(a::ArrayView) = typeof(a)(map(i -> eval(parse("a.$(i)")), fieldnames(a))...; mutable=mutable)
 
-unsafe_view(a::DenseArray, i::Subs) =
-    (shp = vshape(a, i); make_unsafe_view(a, restrict_crank(acontrank(a, i), shp), shp, i))
+unsafe_view(a::DenseArray, i::Subs; mutable=true) =
+    (shp = vshape(a, i); make_unsafe_view(a, restrict_crank(acontrank(a, i), shp), shp, i; mutable=mutable))
 
-unsafe_view(a::DenseArray, i1::Subs, i2::Subs) =
-    (shp = vshape(a, i1, i2); make_unsafe_view(a, restrict_crank(acontrank(a, i1, i2), shp), shp, i1, i2))
+unsafe_view(a::DenseArray, i1::Subs, i2::Subs; mutable=true) =
+    (shp = vshape(a, i1, i2); make_unsafe_view(a, restrict_crank(acontrank(a, i1, i2), shp), shp, i1, i2; mutable=mutable))
 
-unsafe_view(a::DenseArray, i1::Subs, i2::Subs, i3::Subs) =
-    (shp = vshape(a, i1, i2, i3); make_unsafe_view(a, restrict_crank(acontrank(a, i1, i2, i3), shp), shp, i1, i2, i3))
+unsafe_view(a::DenseArray, i1::Subs, i2::Subs, i3::Subs; mutable=true) =
+    (shp = vshape(a, i1, i2, i3); make_unsafe_view(a, restrict_crank(acontrank(a, i1, i2, i3), shp), shp, i1, i2, i3; mutable=mutable))
 
-unsafe_view(a::DenseArray, i1::Subs, i2::Subs, i3::Subs, i4::Subs) =
-    (shp = vshape(a, i1, i2, i3, i4); make_unsafe_view(a, restrict_crank(acontrank(a, i1, i2, i3, i4), shp), shp, i1, i2, i3, i4))
+unsafe_view(a::DenseArray, i1::Subs, i2::Subs, i3::Subs, i4::Subs; mutable=true) =
+    (shp = vshape(a, i1, i2, i3, i4); make_unsafe_view(a, restrict_crank(acontrank(a, i1, i2, i3, i4), shp), shp, i1, i2, i3, i4; mutable=mutable))
 
-unsafe_view(a::DenseArray, i1::Subs, i2::Subs, i3::Subs, i4::Subs, i5::Subs, I::Subs...) =
+unsafe_view(a::DenseArray, i1::Subs, i2::Subs, i3::Subs, i4::Subs, i5::Subs, I::Subs...; mutable=true) =
     (shp = vshape(a, i1, i2, i3, i4, i5, I...);
-     make_unsafe_view(a, restrict_crank(acontrank(a, i1, i2, i3, i4, i5, I...), shp), shp, i1, i2, i3, i4, i5, I...))
+     make_unsafe_view(a, restrict_crank(acontrank(a, i1, i2, i3, i4, i5, I...), shp), shp, i1, i2, i3, i4, i5, I...; mutable=mutable))
